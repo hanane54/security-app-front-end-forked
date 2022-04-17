@@ -1,0 +1,14 @@
+.mybutton{
+    text-align: center;
+    color: var(--first-color);
+    background-color: var(--third-color);
+    border: 1px solid var(--second-color);
+    border-radius: 3px;
+    min-height: 15px;
+    min-width: 30px;
+}
+.mybutton:hover{
+    color: var(--second-color);
+    background-color: var(--fourth-color);
+    transition: 0.5s;
+}

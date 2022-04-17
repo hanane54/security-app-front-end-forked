@@ -1,0 +1,32 @@
+.header{
+    width: 100%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    color: var(--fourth-color);
+}
+.navigation{
+    flex :0.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navigation ul{
+    flex: 0.6;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+}
+.link{
+    color: var(--fourth-color);
+    text-decoration: none;
+}
+.link:hover{
+    font-size: x-large;
+    transition:0.5s;
+    border-bottom: 4px solid var(--third-color);
+}
+.header h1{
+    flex: 0.3;
+}

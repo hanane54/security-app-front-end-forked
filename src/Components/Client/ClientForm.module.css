@@ -1,0 +1,42 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--fourth-color);
+    width:50%;
+    border-radius: 20px;
+    padding: 20px 20px;
+    color:var(--first-color);
+    box-shadow: 2px 2px 2px 3px rgb(88, 88, 88);
+}
+.inputs{
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+}
+.inputs input{
+    flex:0.8;
+    border-radius: 3px;
+    height: 20px;
+    border: 1px solid var(--second-color);
+}
+.inputs input:focus{
+    outline: none;
+}
+.inputs button{
+    flex: 0.15;
+}
+.buttons {
+    padding:10px 0px;
+    width:90%;
+    display: flex;
+    justify-content: space-between;
+}
+.buttons button{
+    flex:0.2;
+    height: 25px;
+}
+.form p{
+    color: red;
+}

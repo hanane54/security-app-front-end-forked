@@ -1,0 +1,16 @@
+.orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--fourth-color);
+}
+.link{
+  color: var(--fourth-color);
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+.link:hover{
+  font-size: x-large;
+  transition:0.5s;
+  border-bottom: 4px solid var(--third-color);
+}
