@@ -37,9 +37,7 @@ function ClientForm(props) {
           url: host + `/clients/${clientId}`,
           method: "get",
         },
-        (data) => {
-          console.log(data);
-        }
+        () => {}
       );
       setFormError("");
     } else {
@@ -137,7 +135,7 @@ function ClientForm(props) {
         <label>Last Name</label>
         <input
           type="text"
-          placeholder="chafik"
+          placeholder="last name"
           onChange={lastNameHandler}
           value={lastName}
         />
@@ -146,7 +144,7 @@ function ClientForm(props) {
         <label>First Name</label>
         <input
           type="text"
-          placeholder="salmane"
+          placeholder="first name"
           onChange={firstNameHandler}
           value={firstName}
         />
@@ -171,7 +169,7 @@ function ClientForm(props) {
         <Button onClick={deleteClient}>delete client</Button>
         <Button
           onClick={() => {
-            props.search("");
+            window.location.reload(false);
           }}
         >
           show all clients
