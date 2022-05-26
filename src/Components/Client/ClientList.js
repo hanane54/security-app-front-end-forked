@@ -4,6 +4,7 @@ import Spinner from "../ui/Spinner";
 import styles from "./ClientList.module.css";
 
 function ClientList(props) {
+  
   const [clients, setClients] = useState([]);
   const { isLoading, error, sendRequest: getAllClients } = useHttp();
 

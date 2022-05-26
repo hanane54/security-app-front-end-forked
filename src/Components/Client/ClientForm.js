@@ -3,6 +3,7 @@ import useHttp, { host } from "../../assets/requests";
 import Button from "../ui/Button";
 import Spinner from "../ui/Spinner";
 import styles from "./ClientForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 function ClientForm(props) {
   const [clientId, setClientId] = useState("");
@@ -110,6 +111,13 @@ function ClientForm(props) {
     }
   };
 
+  let navigate = useNavigate(); 
+  const routeChange = (event) =>{
+    event.preventDefault(); 
+    let path = `/emission`; 
+    navigate(path);
+  }
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -174,6 +182,7 @@ function ClientForm(props) {
         >
           show all clients
         </Button>
+        <Button onClick={routeChange}>Emission</Button>
       </div>
     </form>
   );

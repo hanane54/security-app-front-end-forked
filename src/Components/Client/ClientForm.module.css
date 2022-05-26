@@ -32,6 +32,7 @@
     width:90%;
     display: flex;
     justify-content: space-between;
+    column-gap: 4px;
 }
 .buttons button{
     flex:0.2;
