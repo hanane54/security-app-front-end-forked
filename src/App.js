@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import ClientOrdersPage from "./pages/ClientOrdersPage";
 import EmissionPage from "./pages/EmissionPage"
 import ReceptionPage from "./pages/ReceptionPage";
+import FileInclusionPage from "./pages/FileInclusionPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/clients-orders" element={<ClientOrdersPage />} />
       <Route path="/emission" element={<EmissionPage />} />
       <Route path="/reception/:clientId" element={<ReceptionPage/>}/>
+      <Route path="/file-inclusion/:fileName" element={<FileInclusionPage/>}/>
     </Routes>
   );
 }
