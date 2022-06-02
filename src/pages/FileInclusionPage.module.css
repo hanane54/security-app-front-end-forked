@@ -8,7 +8,7 @@
     color: var(--second-color);
 }
 .includedFile{
-    color: var(--fourth-color);
+    padding: 10px;
 }
 .desc{
     border: 1px solid var(--second-color);
