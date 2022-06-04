@@ -1,0 +1,16 @@
+.card{
+    background-color: white;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: var(--second-color);
+}
+.includedFile{
+    padding: 10px;
+}
+.desc{
+    border: 1px solid var(--second-color);
+    padding: 7px;
+}

@@ -22,6 +22,16 @@ function Header() {
               clients orders
             </NavLink>
           </li>
+          <li>
+            <NavLink className={styles.link} to="/emission">
+              SQL Injection
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={styles.link} to="/file-inclusion">
+              File Inclusion
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </div>
