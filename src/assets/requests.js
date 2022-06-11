@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export const host="http://localhost:9000/security-api/v1";
+export const host="http://localhost:8080/security-api/v1";
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);

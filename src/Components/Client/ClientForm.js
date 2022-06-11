@@ -3,13 +3,13 @@ import useHttp, { host } from "../../assets/requests";
 import Button from "../ui/Button";
 import Spinner from "../ui/Spinner";
 import styles from "./ClientForm.module.css";
-import { useNavigate } from "react-router-dom";
 
 function ClientForm(props) {
   const [clientId, setClientId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [clientAge, setClientAge] = useState("");
+  const [image,setImage] = useState("");
   const [formError, setFormError] = useState("");
 
   const clientIdHandler = (event) => {
@@ -28,6 +28,10 @@ function ClientForm(props) {
     setLastName(event.target.value);
   };
 
+  const imageHandler = (event) =>{
+    setImage(event.target.value);
+  }
+
   const { isLoading, sendRequest } = useHttp();
 
   const searchClient = () => {
@@ -38,16 +42,18 @@ function ClientForm(props) {
           url: host + `/clients/${clientId}`,
           method: "get",
         },
-        () => {}
+        (data) => {
+          console.log(data);
+        }
       );
       setFormError("");
     } else {
       setFormError("* the client id must not be null");
     }
   };
-
+  
   const addClient = () => {
-    if (firstName && lastName && clientAge) {
+    if (firstName && lastName && clientAge && image) {
       sendRequest(
         {
           url: host + `/clients`,
@@ -59,9 +65,10 @@ function ClientForm(props) {
             first_name: firstName,
             last_name: lastName,
             age: clientAge,
+            image: image,
           },
         },
-        () => {}
+        () => { }
       );
       setFormError("");
     } else {
@@ -111,13 +118,6 @@ function ClientForm(props) {
     }
   };
 
-  let navigate = useNavigate(); 
-  const routeChange = (event) =>{
-    event.preventDefault(); 
-    let path = `/emission`; 
-    navigate(path);
-  }
-
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -125,10 +125,11 @@ function ClientForm(props) {
     setClientId("");
     setFirstName("");
     setLastName("");
+    setImage("");
   };
 
   return (
-    <form onSubmit={submitHandler} className={styles.form}>
+    <form onSubmit={submitHandler} className={styles.form}  enctype="multipart/form-data">
       <div className={styles.inputs}>
         <label> Client Id</label>
         <input
@@ -143,7 +144,7 @@ function ClientForm(props) {
         <label>Last Name</label>
         <input
           type="text"
-          placeholder="last name"
+          placeholder="your last name"
           onChange={lastNameHandler}
           value={lastName}
         />
@@ -152,7 +153,7 @@ function ClientForm(props) {
         <label>First Name</label>
         <input
           type="text"
-          placeholder="first name"
+          placeholder="your first name"
           onChange={firstNameHandler}
           value={firstName}
         />
@@ -161,13 +162,24 @@ function ClientForm(props) {
         <label>Client Age</label>
         <input
           type="number"
-          placeholder="22"
+          placeholder="your age"
           onChange={ageHandler}
           value={clientAge}
           min={0}
           max={100}
         />
       </div>
+
+        <div className={styles.inputs}>
+          <label>Upload image </label>
+          <input
+            type="file"
+            name="image" 
+            accept="image/png, image/jpeg"
+            onChange={imageHandler}/>
+        </div>
+        {/* <img src={image} id="img" alt="preview"/> */}
+
       {formError && <p>{formError}</p>}
       {isLoading && <Spinner />}
       {/* {(!isLoading && !error) && <p>request succeeded</p>} */}
@@ -177,12 +189,11 @@ function ClientForm(props) {
         <Button onClick={deleteClient}>delete client</Button>
         <Button
           onClick={() => {
-            window.location.reload(false);
+            props.search("");
           }}
         >
           show all clients
         </Button>
-        <Button onClick={routeChange}>Emission</Button>
       </div>
     </form>
   );

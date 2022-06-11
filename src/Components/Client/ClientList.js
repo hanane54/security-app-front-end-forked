@@ -32,6 +32,8 @@ function ClientList(props) {
               <th>first name</th>
               <th>last name</th>
               <th>age</th>
+              <th>image</th>
+
             </tr>
           </thead>
           <tbody>
@@ -41,6 +43,8 @@ function ClientList(props) {
                 <td>{client.first_name}</td>
                 <td>{client.last_name}</td>
                 <td>{client.age}</td>
+                <td>{client.image}</td>
+
               </tr>
             ))}
           </tbody>
