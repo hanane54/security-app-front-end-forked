@@ -1,15 +1,19 @@
 import { useState } from "react";
-import useHttp, { host } from "../../assets/requests";
+import useHttp, { host,useHttpImages } from "../../assets/requests";
 import Button from "../ui/Button";
 import Spinner from "../ui/Spinner";
 import styles from "./ClientForm.module.css";
+import axios from 'axios';
+ 
+import React,{Component} from 'react';
+import ImageUploader from "./ImageUploader";
 
 function ClientForm(props) {
   const [clientId, setClientId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [clientAge, setClientAge] = useState("");
-  const [image,setImage] = useState("");
+  const [image,setImage] = useState(null);
   const [formError, setFormError] = useState("");
 
   const clientIdHandler = (event) => {
@@ -29,10 +33,24 @@ function ClientForm(props) {
   };
 
   const imageHandler = (event) =>{
-    setImage(event.target.value);
+    setImage(event.target.files[0]);
+    
+    
   }
+  
+  // const onImageUpload = () =>{
 
-  const { isLoading, sendRequest } = useHttp();
+    
+    const { isLoading, sendRequest } = useHttpImages();
+    const onImageUpload =(event)=>{
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onloadend = () => {
+        setImage(reader.result);
+        
+      };
+
+    }
 
   const searchClient = () => {
     if (clientId) {
@@ -53,7 +71,25 @@ function ClientForm(props) {
   };
   
   const addClient = () => {
+
     if (firstName && lastName && clientAge && image) {
+    // const formData = new FormData();
+    // formData.append("first_name",firstName);
+    // formData.append("last_name",lastName);
+    // formData.append("age",clientAge);
+    // formData.append("image",image);
+    // axios
+    // .post(host + `/clients`, formData)
+    // .then((res) => {
+    //   alert("File Upload success");
+    // })
+    // .catch((err) => alert("File Upload Error"));
+
+    const formData = new FormData();
+    formData.append("first_name",firstName);
+    formData.append("last_name",lastName);
+    formData.append("age",clientAge);
+    formData.append("image",image);
       sendRequest(
         {
           url: host + `/clients`,
@@ -61,12 +97,7 @@ function ClientForm(props) {
           headers: {
             "Content-Type": "Application/json",
           },
-          body: {
-            first_name: firstName,
-            last_name: lastName,
-            age: clientAge,
-            image: image,
-          },
+          body: formData
         },
         () => { }
       );
@@ -125,7 +156,7 @@ function ClientForm(props) {
     setClientId("");
     setFirstName("");
     setLastName("");
-    setImage("");
+    setImage(null);
   };
 
   return (
@@ -171,14 +202,11 @@ function ClientForm(props) {
       </div>
 
         <div className={styles.inputs}>
-          <label>Upload image </label>
-          <input
-            type="file"
-            name="image" 
-            accept="image/png, image/jpeg"
-            onChange={imageHandler}/>
+        <label>Upload image </label>
+        <input type="file" name="image" onChange={imageHandler} value={image}  />
+            <button onClick={onImageUpload}>Upload</button>
         </div>
-        {/* <img src={image} id="img" alt="preview"/> */}
+        
 
       {formError && <p>{formError}</p>}
       {isLoading && <Spinner />}
